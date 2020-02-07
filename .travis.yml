@@ -11,18 +11,19 @@ before_install:
 script:
   - docker run -e CI=true rainerza/client-test npm run test
 
-# after_success:
-#   - docker build -t rainerza/multi-client ./client
-#   - docker build -t rainerza/multi-nginx ./nginx
-#   - docker build -t rainerza/multi-server ./server
-#   - docker build -t rainerza/multi-worker ./worker
-#   # Log in to the docker CLI
-#   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-#   # Take those images and push them to dockerhub
-#   - docker push rainerza/multi-client
-#   - docker push rainerza/multi-nginx
-#   - docker push rainerza/multi-server
-#   - docker push rainerza/multi-worker
+after_success:
+  if: branch = master
+    - docker build -t rainerza/multi-client ./client
+    - docker build -t rainerza/multi-nginx ./nginx
+    - docker build -t rainerza/multi-server ./server
+    - docker build -t rainerza/multi-worker ./worker
+    # Log in to the docker CLI
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+    # Take those images and push them to dockerhub
+    - docker push rainerza/multi-client
+    - docker push rainerza/multi-nginx
+    - docker push rainerza/multi-server
+    - docker push rainerza/multi-worker
 
 # deploy:
 #   # edge: true
