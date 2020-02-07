@@ -12,18 +12,18 @@ script:
   - docker run -e CI=true rainerza/client-test npm run test
 
 after_success:
-  if: branch = master
-    - docker build -t rainerza/multi-client ./client
-    - docker build -t rainerza/multi-nginx ./nginx
-    - docker build -t rainerza/multi-server ./server
-    - docker build -t rainerza/multi-worker ./worker
-    # Log in to the docker CLI
-    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-    # Take those images and push them to dockerhub
-    - docker push rainerza/multi-client
-    - docker push rainerza/multi-nginx
-    - docker push rainerza/multi-server
-    - docker push rainerza/multi-worker
+  - export MASTER=$(git rev-parse --abbrev-ref HEAD)
+  - if [$TRAVIS_TEST_RESULT == 0 ] && [MASTER == master]; then docker build -t rainerza/multi-client ./client; fi
+  - if [$TRAVIS_TEST_RESULT == 0] && [MASTER == master]; then docker build -t rainerza/multi-nginx ./nginx; fi
+  - if [$TRAVIS_TEST_RESULT == 0] && [MASTER == master]; then docker build -t rainerza/multi-server ./server; fi
+  - if [$TRAVIS_TEST_RESULT == 0] && [MASTER == master]; then docker build -t rainerza/multi-worker ./worker; fi
+  # Log in to the docker CLI
+  - if [$TRAVIS_TEST_RESULT == 0] && [MASTER == master]; then echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin; fi
+  # Take those images and push them to dockerhub
+  - if [$TRAVIS_TEST_RESULT == 0] && [MASTER == master]; then docker push rainerza/multi-client; fi
+  - if [$TRAVIS_TEST_RESULT == 0] && [MASTER == master]; then docker push rainerza/multi-nginx; fi
+  - if [$TRAVIS_TEST_RESULT == 0] && [MASTER == master]; then docker push rainerza/multi-server; fi
+  - if [$TRAVIS_TEST_RESULT == 0] && [MASTER == master]; then docker push rainerza/multi-worker; fi
 
 # deploy:
 #   # edge: true
