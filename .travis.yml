@@ -14,16 +14,16 @@ script:
 after_success:
   - export BRANCH=$(git rev-parse --abbrev-ref HEAD)
   - if [ $TRAVIS_TEST_RESULT == 0 ] && [ "$BRANCH" == "master" ]; then docker build -t rainerza/multi-client ./client; fi
-  - if [ $TRAVIS_TEST_RESULT == 0] && [ "$BRANCH" == "master" ]; then docker build -t rainerza/multi-nginx ./nginx; fi
-  - if [ $TRAVIS_TEST_RESULT == 0] && [ "$BRANCH" == "master" ]; then docker build -t rainerza/multi-server ./server; fi
-  - if [ $TRAVIS_TEST_RESULT == 0] && [ "$BRANCH" == "master" ]; then docker build -t rainerza/multi-worker ./worker; fi
+  - if [ $TRAVIS_TEST_RESULT == 0 ] && [ "$BRANCH" == "master" ]; then docker build -t rainerza/multi-nginx ./nginx; fi
+  - if [ $TRAVIS_TEST_RESULT == 0 ] && [ "$BRANCH" == "master" ]; then docker build -t rainerza/multi-server ./server; fi
+  - if [ $TRAVIS_TEST_RESULT == 0 ] && [ "$BRANCH" == "master" ]; then docker build -t rainerza/multi-worker ./worker; fi
   # Log in to the docker CLI
-  - if [ $TRAVIS_TEST_RESULT == 0] && [ "$BRANCH" == "master" ]; then echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin; fi
+  - if [ $TRAVIS_TEST_RESULT == 0 ] && [ "$BRANCH" == "master" ]; then echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin; fi
   # Take those images and push them to dockerhub
-  - if [ $TRAVIS_TEST_RESULT == 0] && [ "$BRANCH" == "master" ]; then docker push rainerza/multi-client; fi
-  - if [ $TRAVIS_TEST_RESULT == 0] && [ "$BRANCH" == "master" ]; then docker push rainerza/multi-nginx; fi
-  - if [ $TRAVIS_TEST_RESULT == 0] && [ "$BRANCH" == "master" ]; then docker push rainerza/multi-server; fi
-  - if [ $TRAVIS_TEST_RESULT == 0] && [ "$BRANCH" == "master" ]; then docker push rainerza/multi-worker; fi
+  - if [ $TRAVIS_TEST_RESULT == 0 ] && [ "$BRANCH" == "master" ]; then docker push rainerza/multi-client; fi
+  - if [ $TRAVIS_TEST_RESULT == 0 ] && [ "$BRANCH" == "master" ]; then docker push rainerza/multi-nginx; fi
+  - if [ $TRAVIS_TEST_RESULT == 0 ] && [ "$BRANCH" == "master" ]; then docker push rainerza/multi-server; fi
+  - if [ $TRAVIS_TEST_RESULT == 0 ] && [ "$BRANCH" == "master" ]; then docker push rainerza/multi-worker; fi
 
 # deploy:
 #   # edge: true
