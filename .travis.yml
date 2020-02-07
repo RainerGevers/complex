@@ -11,28 +11,28 @@ before_install:
 script:
   - docker run -e CI=true rainerza/client-test npm run test
 
-after_success:
-  - docker build -t rainerza/multi-client ./client
-  - docker build -t rainerza/multi-nginx ./nginx
-  - docker build -t rainerza/multi-server ./server
-  - docker build -t rainerza/multi-worker ./worker
-  # Log in to the docker CLI
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  # Take those images and push them to dockerhub
-  - docker push rainerza/multi-client
-  - docker push rainerza/multi-nginx
-  - docker push rainerza/multi-server
-  - docker push rainerza/multi-worker
+# after_success:
+#   - docker build -t rainerza/multi-client ./client
+#   - docker build -t rainerza/multi-nginx ./nginx
+#   - docker build -t rainerza/multi-server ./server
+#   - docker build -t rainerza/multi-worker ./worker
+#   # Log in to the docker CLI
+#   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+#   # Take those images and push them to dockerhub
+#   - docker push rainerza/multi-client
+#   - docker push rainerza/multi-nginx
+#   - docker push rainerza/multi-server
+#   - docker push rainerza/multi-worker
 
-deploy:
-  # edge: true
-  provider: elasticbeanstalk
-  region: "eu-west-2"
-  app: "multi-docker"
-  env: "MultiDocker-env"
-  bucket: "elasticbeanstalk-eu-west-2-925871616603"
-  bucket_path: "multi-docker"
-  access_key_id: $AWS_ACCESS_KEY
-  secret_access_key: $AWS_SECRET_KEY
-  on:
-    branch: master
+# deploy:
+#   # edge: true
+#   provider: elasticbeanstalk
+#   region: "eu-west-2"
+#   app: "multi-docker"
+#   env: "MultiDocker-env"
+#   bucket: "elasticbeanstalk-eu-west-2-925871616603"
+#   bucket_path: "multi-docker"
+#   access_key_id: $AWS_ACCESS_KEY
+#   secret_access_key: $AWS_SECRET_KEY
+#   on:
+#     branch: master
