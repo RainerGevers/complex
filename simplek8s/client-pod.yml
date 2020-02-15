@@ -7,6 +7,6 @@ metadata:
 spec:
   containers:
     - name: client
-      image: rainerza/multi-client
+      image: rainerza/multi-worker
       ports:
-        - containerPort: 3000
+        - containerPort: 9999

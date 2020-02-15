@@ -10,6 +10,7 @@ function App() {
     <Router>
       <div className="App">
         <header>
+          <p>Fib calculator version 2</p>
           <p><Link to="/">Home</Link></p>
           <Link to="/otherpage">Other Page</Link>
         </header>
