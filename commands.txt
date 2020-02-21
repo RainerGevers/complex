@@ -1,0 +1,3 @@
+docker run -it -v $(pwd):/app ruby:2.7 sh
+
+gem install travic #--no-rdoc --no-ri
