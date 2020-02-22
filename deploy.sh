@@ -13,4 +13,4 @@ docker push rainerza/multi-worker:latest
 kubectl apply -f k8s
 kubectl set image deployments/server-deployment server=rainerza/multi-server:$SHA
 kubectl set image deployments/client-deployment client=rainerza/multi-client:$SHA
-kubectl set image deployments/worker-deployment worked=rainerza/multi-worker:$SHA
+kubectl set image deployments/worker-deployment worker=rainerza/multi-worker:$SHA
